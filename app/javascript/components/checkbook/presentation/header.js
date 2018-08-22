@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import '../../../assets/stylesheets/checkbook.css';
 
 class Header extends Component {
   render() {
