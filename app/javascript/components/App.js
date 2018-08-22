@@ -3,13 +3,6 @@ import AccountSummary from './checkbook/account-summary';
 import Header from './checkbook/header';
 import TableHeader from './checkbook/table-header';
 
-var transactionData = [
-  {date: '04-04-2018', debit: -9, credit: 0, description: 'lunch'},
-  {date: '05-05-2018', debit: 0, credit: 5000, description: 'cash check'},
-  {date: '06-06-2018', debit: 0, credit: 172, description: 'refund'},
-  {date: '07-07-2018', debit: -111, credit: 0, description: 'groceries'},
-]
-
 class App extends Component {
   constructor(props) {
     super();
@@ -19,9 +12,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      transactions: transactionData,
-    });
+    fetch('/api/v1/transactions.json').then(response => response.json())
+    .then((data) => {this.setState({transactions:data})});
   };
 
   render () {
