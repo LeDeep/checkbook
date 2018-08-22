@@ -1,11 +1,13 @@
 import React, {Component} from "react";
-import TransactionSummary from './checkbook/transaction-summary';
+import AccountSummary from './checkbook/account-summary';
+import Header from './checkbook/header';
+import TableHeader from './checkbook/table-header';
 
 var transactionData = [
-  {date: '04-04-2018', amount: -9, description: 'lunch'},
-  {date: '05-05-2018', amount: 5000, description: 'cash check'},
-  {date: '06-06-2018', amount: 172, description: 'refund'},
-  {date: '07-07-2018', amount: -111, description: 'groceries'},
+  {date: '04-04-2018', debit: -9, credit: 0, description: 'lunch'},
+  {date: '05-05-2018', debit: 0, credit: 5000, description: 'cash check'},
+  {date: '06-06-2018', debit: 0, credit: 172, description: 'refund'},
+  {date: '07-07-2018', debit: -111, credit: 0, description: 'groceries'},
 ]
 
 class App extends Component {
@@ -25,8 +27,9 @@ class App extends Component {
   render () {
     return (
       <div>
-        <h1>My Checkbook</h1>
-          <TransactionSummary transactions={this.state.transactions}/>
+        <Header />
+        <TableHeader />
+        <AccountSummary transactions={this.state.transactions}/>
       </div>
     );
   }

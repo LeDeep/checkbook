@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Transaction from './transaction';
 
-class TransactionSummary extends Component {
+class AccountSummary extends Component {
   render(){
     return this.props.transactions.map((transaction,index) => (
       <Transaction
@@ -12,4 +12,4 @@ class TransactionSummary extends Component {
   }
 }
 
-export default TransactionSummary
+export default AccountSummary
