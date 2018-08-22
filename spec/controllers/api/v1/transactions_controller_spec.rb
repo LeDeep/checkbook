@@ -23,4 +23,15 @@ describe Api::V1::TransactionsController do
       expect(response.status).to eq 200
     end
   end
+
+  describe "#create" do
+    it "routes from POST /api/v1/transactions" do
+      expect({ :post => "/api/v1/transactions" }).to route_to(:controller => "api/v1/transactions", :action => "create")
+    end
+
+    it "responds with http status 200" do
+      post :create, params: {transaction: {transaction_date: "2018-08-21", transaction_type: "debit", amount: 5186, description: "bills"}}
+      expect(response.status).to eq 200
+    end
+  end
 end
