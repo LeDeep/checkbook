@@ -79,6 +79,7 @@ class Transaction extends Component {
         <div>
           {this.state.editable ? editTransaction : showCreditTransaction}
           <Button onClick={() => this.handleEdit()}>{buttonText}</Button>
+          <Button onClick={() => this.props.handleDelete(this.props.id)}>Delete</Button>
         </div>
       )
     } else if(this.props.transaction_type === 'debit') {
@@ -86,6 +87,7 @@ class Transaction extends Component {
         <div>
           {this.state.editable ? editTransaction : showDebitTransaction}
           <Button onClick={() => this.handleEdit()}>{buttonText}</Button>
+          <Button onClick={() => this.props.handleDelete(this.props.id)}>Delete</Button>
         </div>
       )
     }

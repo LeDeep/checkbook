@@ -44,7 +44,9 @@ class AddTransaction extends Component {
 
   addEntry = () => {
     let transaction = {transaction_date: this.state.transaction_date, transaction_type: this.state.transaction_type, amount: this.state.amount, description: this.state.description}
-    this.props.handleNewEntry(transaction)
+    if(this.state.transaction_type && this.state.transaction_date && this.state.amount && this.state.description) {
+      this.props.handleNewEntry(transaction)
+    }
   }
 
   render(){

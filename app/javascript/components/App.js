@@ -15,6 +15,7 @@ class App extends Component {
 
     this.handleNewEntry = this.handleNewEntry.bind(this)
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -62,6 +63,28 @@ class App extends Component {
     })
   }
 
+  handleDelete = (id) => {
+    if (window.confirm("Are you sure you want to delete this transaction?")) {
+      fetch('api/v1/transactions/' + id, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then((response) => {
+        this.removeTransaction(id)
+        alert('Transaction has been deleted and your balance has been updated.')
+      })
+    }
+  }
+
+  removeTransaction = (id) => {
+    var newTransactions;
+    newTransactions = this.state.transactions.filter((transaction) => {
+      return transaction.id !== id;
+    });
+    this.setState({transactions: newTransactions});
+  }
+
   render () {
     return (
       <div>
@@ -69,7 +92,7 @@ class App extends Component {
         <Balance transactions={this.state.transactions}/>
         <AddTransaction handleNewEntry={this.handleNewEntry} />
         <TableHeader />
-        <AccountSummary transactions={this.state.transactions} handleUpdate={this.handleUpdate}/>
+        <AccountSummary transactions={this.state.transactions} handleUpdate={this.handleUpdate} handleDelete={this.handleDelete}/>
       </div>
     );
   }
