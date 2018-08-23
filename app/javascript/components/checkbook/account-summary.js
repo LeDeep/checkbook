@@ -7,6 +7,7 @@ class AccountSummary extends Component {
       <Transaction
         key={index}
         {...transaction}
+        handleUpdate={this.props.handleUpdate}
       />
     ))
   }

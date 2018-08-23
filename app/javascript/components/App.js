@@ -14,6 +14,7 @@ class App extends Component {
     };
 
     this.handleNewEntry = this.handleNewEntry.bind(this)
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -43,6 +44,24 @@ class App extends Component {
     })
   }
 
+  handleUpdate = (transaction) => {
+    fetch('api/v1/transactions/' + transaction.id, {
+      method: 'PUT',
+      body: JSON.stringify({transaction}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      this.updateTransaction(transaction)
+    })
+  }
+
+  updateTransaction = (transaction) => {
+    fetch('/api/v1/transactions.json').then(resp => resp.json()).then(data => {
+      this.setState({transactions:data})
+    })
+  }
+
   render () {
     return (
       <div>
@@ -50,7 +69,7 @@ class App extends Component {
         <Balance transactions={this.state.transactions}/>
         <AddTransaction handleNewEntry={this.handleNewEntry} />
         <TableHeader />
-        <AccountSummary transactions={this.state.transactions}/>
+        <AccountSummary transactions={this.state.transactions} handleUpdate={this.handleUpdate}/>
       </div>
     );
   }
