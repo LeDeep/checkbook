@@ -34,4 +34,10 @@ describe Api::V1::TransactionsController do
       expect(response.status).to eq 200
     end
   end
+
+  describe "#update" do
+    it "should route from PUT /transactions" do
+      expect({put: "api/v1/transactions/123"}).to route_to(controller: "api/v1/transactions", action: "update", id: "123")
+    end
+  end
 end

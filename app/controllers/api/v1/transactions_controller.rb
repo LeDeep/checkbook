@@ -8,6 +8,12 @@ class Api::V1::TransactionsController < ApplicationController
     render json: transaction
   end
 
+  def update
+    transaction = Transaction.find(params[:id])
+    transaction.update_attributes(transaction_params)
+    render json: transaction
+  end
+
   private
 
   def transaction_params
