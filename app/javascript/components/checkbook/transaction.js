@@ -11,7 +11,7 @@ class Transaction extends Component {
             <td>{this.props.transaction_date}</td>
             <td>{this.props.description}</td>
             <td></td>
-            <td>{this.props.amount}</td>
+            <td>{this.props.amount.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>
@@ -23,7 +23,7 @@ class Transaction extends Component {
           <tr>
             <td>{this.props.transaction_date}</td>
             <td>{this.props.description}</td>
-            <td>{this.props.amount}</td>
+            <td>{this.props.amount.toFixed(2)}</td>
             <td></td>
           </tr>
         </tbody>

@@ -3,12 +3,14 @@ import AccountSummary from './checkbook/account-summary';
 import AddTransaction from './checkbook/add-transaction';
 import Header from './checkbook/presentation/header';
 import TableHeader from './checkbook/presentation/table-header';
+import Balance from './checkbook/balance';
 
 class App extends Component {
   constructor(props) {
     super();
     this.state = {
-      transactions:[]
+      transactions:[],
+      total: 0
     };
 
     this.handleNewEntry = this.handleNewEntry.bind(this)
@@ -34,7 +36,10 @@ class App extends Component {
 
   addNewTransaction = (transaction) => {
     this.setState({
-      transactions: this.state.transactions.concat(transaction)
+      transactions: this.state.transactions.concat(transaction),
+      total: this.state.transactions.reduce((a,b) => {
+        return a + b.amount;
+      }, 0)
     })
   }
 
@@ -42,6 +47,7 @@ class App extends Component {
     return (
       <div>
         <Header />
+        <Balance transactions={this.state.transactions}/>
         <AddTransaction handleNewEntry={this.handleNewEntry} />
         <TableHeader />
         <AccountSummary transactions={this.state.transactions}/>
