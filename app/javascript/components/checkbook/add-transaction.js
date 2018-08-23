@@ -47,6 +47,12 @@ class AddTransaction extends Component {
     if(this.state.transaction_type && this.state.transaction_date && this.state.amount && this.state.description) {
       this.props.handleNewEntry(transaction)
     }
+    this.setState({
+      transaction_type: '',
+      transaction_date: '',
+      amount: '',
+      description: ''
+    })
   }
 
   render(){
