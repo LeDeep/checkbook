@@ -14,6 +14,10 @@ class Api::V1::TransactionsController < ApplicationController
     render json: transaction
   end
 
+  def destroy
+    Transaction.destroy(params[:id])
+  end
+
   private
 
   def transaction_params

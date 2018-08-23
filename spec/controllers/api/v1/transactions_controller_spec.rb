@@ -40,4 +40,20 @@ describe Api::V1::TransactionsController do
       expect({put: "api/v1/transactions/123"}).to route_to(controller: "api/v1/transactions", action: "update", id: "123")
     end
   end
+
+  describe "#destroy" do
+    it "should route from DELETE /transactions" do
+      expect({delete: "api/v1/transactions/123"}).to route_to(controller: "api/v1/transactions", action: "destroy", id: "123")
+    end
+
+    it "has one less transaction after deleting a transaction" do
+      delete :destroy, params: { id: debit_transaction.id }
+      expect(Transaction.count).to eq 1
+    end
+
+    it "responds with http status 204" do
+      delete :destroy, params: { id: debit_transaction.id }
+      expect(response.status).to eq 204
+    end
+  end
 end
